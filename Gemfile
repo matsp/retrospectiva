@@ -25,4 +25,9 @@ group :test do
   gem "rspec", "~> 1.3.0", :require => "spec"
   gem "rspec-rails", "~> 1.3.0", :require => "spec"
   gem "shoulda"
+  gem "test-unit", "~> 1.2.3"
+end
+
+group :development do
+  gem "thin"
 end
