@@ -36,7 +36,7 @@ describe Project do
 
     it "should have many ticket reports" do
       @project.should have_many(:ticket_reports)
-      @project.ticket_reports.should have(:no).records
+      @project.ticket_reports.should have(1).records
     end
 
     it "should have many tickets" do
@@ -146,11 +146,11 @@ describe Project do
     end
 
     it "should validate presence of name" do
-      @project.should validate_presence_of(:name)
+      @project.should validate_presence_of(:name).with_message(/minimum is 2 characters/)
     end
 
     it "should validate length of name (2-80 characters)" do
-      @project.should validate_length_of(:name, :within => 2..80)
+      @project.should ensure_length_of(:name).is_at_least(2).is_at_most(80)
     end
 
     it "should validate format of name (must at least begin with a latin character)" do

@@ -58,11 +58,11 @@ describe Status do
     end
 
     it "should validate presence of state" do
-      @status.should validate_presence_of(:state_id)
+      @status.should validate_presence_of(:state_id).with_message(/is not included in the list/)
     end
   
     it "should validate presence of statement" do
-      @status.should validate_presence_of(:statement_id)
+      @status.should validate_presence_of(:statement_id).with_message(/is not included in the list/)
     end
 
     it "should have a state" do

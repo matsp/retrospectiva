@@ -39,15 +39,16 @@ describe TicketPropertyType do
     end
 
     it "should validate presence of name" do
-      @ticket_property_type.should validate_presence_of(:name)
+      @ticket_property_type.name=nil
+      @ticket_property_type.should_not have(:no).error_on(:name)
     end
 
     it "should validate uniqueness of name" do
-      @ticket_property_type.should validate_uniqueness_of(:name)
+      @ticket_property_type.should validate_uniqueness_of(:name).scoped_to(:project_id)
     end
 
     it "should validate length of name (2-20 characters)" do
-      @ticket_property_type.should validate_length_of(:name, :within => 2..20)
+      @ticket_property_type.should ensure_length_of(:name).is_at_least(2).is_at_most(20)
     end
 
     it "should validate format of name" do

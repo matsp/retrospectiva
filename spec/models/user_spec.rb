@@ -73,11 +73,12 @@ describe User do
     before { @user = users(:agent) } 
 
     it "should validate presence of username" do
-      @user.should validate_presence_of(:username)
+      @user.username=nil
+      @user.should_not have(:no).error_on(:username)
     end
 
     it "should validate length of username (3-40 characters)" do
-      @user.should validate_length_of(:username, :within => 3..40)
+      @user.should ensure_length_of(:username).is_at_least(3).is_at_most(40)
     end
 
     it "should validate uniqueness of username" do
@@ -123,7 +124,9 @@ describe User do
     end
 
     it "should validate uniqueness of email" do
-      @user.should validate_uniqueness_of(:email)
+      @user = users(:double_agent)
+      @user.email='agent@somedomain.com'
+      @user.should have(1).error_on(:email)
     end
 
     it "should validate valid time-zone" do
@@ -156,7 +159,9 @@ describe User do
     end
 
     it "should validate uniqueness of SCM name" do
-      @user.should validate_uniqueness_of(:scm_name)
+      @user = users(:double_agent)
+      @user.scm_name='agent'
+      @user.should have(1).error_on(:scm_name)
     end
 
     it "should allow SCM name to be blank" do
@@ -281,13 +286,9 @@ describe User do
     end
 
     it "should validate length of plain password (6-40 characters)" do
-      @user.should validate_length_of(:plain_password, :within => 6..40)
+      @user.should ensure_length_of(:plain_password).is_at_least(6).is_at_most(40)
     end
 
-    it "should validate length of plain password (6-40 characters)" do
-      @user.should validate_length_of(:plain_password, :within => 6..40)
-    end
-    
     it "should validate confirmation of plain password" do      
       @user.plain_password = 'abcdefgh'
       @user.should have(1).error_on(:plain_password)

@@ -81,7 +81,7 @@ describe Milestone do
   end
 
   it "should validate uniqueness name within a project" do
-    @milestone.should validate_uniqueness_of(:name)
+    @milestone.should validate_uniqueness_of(:name).scoped_to(:project_id)
   end
 
   it "should validate presence of project" do

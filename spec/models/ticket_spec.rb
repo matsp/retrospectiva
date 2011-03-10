@@ -422,19 +422,20 @@ describe Ticket do
     end
 
     it 'should validate presence of content' do
-      @ticket.should validate_presence_of(:content)
+      @ticket.content=nil
+      @ticket.should_not have(:no).error_on(:content)
     end
 
     it 'should validate association of status' do
-      @ticket.should validate_association_of(:status)
+      @ticket.should belong_to(:status)
     end
 
     it 'should validate association of priority' do
-      @ticket.should validate_association_of(:priority)
+      @ticket.should belong_to(:priority)
     end
 
     it 'should validate association of project' do
-      @ticket.should validate_association_of(:project)
+      @ticket.should belong_to(:project)
     end
 
     it 'should nullify the email if blank' do

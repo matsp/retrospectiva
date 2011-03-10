@@ -70,7 +70,7 @@ describe TicketChange do
     end
     
     it 'should validate correct association with a ticket' do
-      @ticket_change.should validate_association_of(:ticket)
+      @ticket_change.should belong_to(:ticket)
     end
 
     it 'should nullify the email if blank' do

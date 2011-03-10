@@ -42,7 +42,7 @@ describe SecureToken do
     end
 
     it "should return false if record cannot be found" do
-      SecureToken.stub!(:find_by_value).and_return(nil)
+      SecureToken.stub!(:find_by_id_and_value).and_return(nil)
       SecureToken.spend(secure_tokens(:one).to_s).should be_nil
     end  
   end
@@ -60,7 +60,7 @@ describe SecureToken do
     end
 
     it "should return false if record cannot be found" do
-      SecureToken.stub!(:find_by_value).and_return(nil)
+      SecureToken.stub!(:find_by_id_and_value).and_return(nil)
       SecureToken.spend(secure_tokens(:one).to_s).should be_nil
     end  
   end

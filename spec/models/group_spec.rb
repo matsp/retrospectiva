@@ -49,11 +49,12 @@ describe Group do
     before { @group = Group.new } 
 
     it "should validate presence of name" do
-      @group.should validate_presence_of(:name)
+      @group.name=nil
+      @group.should_not have(:no).error_on(:name)
     end
 
     it "should validate length of name (3-40 characters)" do
-      @group.should validate_length_of(:name, :within => 3..40)
+      @group.should ensure_length_of(:name).is_at_least(3).is_at_most(40)
     end
 
     it "should validate format of name (only alphanumerics)" do
