@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "rails", "2.3.10", :require => false
+gem "rails", "2.3.11", :require => false
 gem "will_paginate", "~> 2.3.0"
 gem "acts-as-taggable-on", "~> 2.0.0" 
 gem "RedCloth", :require => "redcloth"
@@ -22,7 +22,7 @@ else
 end
 
 group :test do
-  gem "rspec", "~> 1.3.0", :require => "spec"
-  gem "rspec-rails", "~> 1.3.0", :require => "spec"
+  gem "rspec", "~> 1.3.1", :require => "spec"
+  gem "rspec-rails", "~> 1.3.3", :require => "spec"
   gem "shoulda"
 end
