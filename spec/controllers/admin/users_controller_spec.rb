@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Admin::UsersController do
-  it_should_behave_like EveryAdminAreaController
+  it_should_behave_like "EveryAdminAreaController"
   
   before do
     permit_access!

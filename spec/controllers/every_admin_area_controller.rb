@@ -1,4 +1,4 @@
-share_as :EveryAdminAreaController do
+shared_examples_for "EveryAdminAreaController" do
   
   def request_restfully(action)
     method, options = case action

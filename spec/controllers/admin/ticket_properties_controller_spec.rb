@@ -4,7 +4,7 @@ describe Admin::TicketPropertiesController do
   def nested_controller_options
     { :project_id => 'retro' }
   end  
-  it_should_behave_like EveryAdminAreaController
+  it_should_behave_like "EveryAdminAreaController"
 
   before do
     permit_access!

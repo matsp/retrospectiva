@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe BrowseController do
-  it_should_behave_like EveryProjectAreaController
+  it_should_behave_like "EveryProjectAreaController"
   before do
     @repository = mock_model(Repository::Subversion, :latest_revision => '123')
     @node = mock_model Repository::Subversion::Node, 

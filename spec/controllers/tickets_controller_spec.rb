@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TicketsController do
-  it_should_behave_like EveryProjectAreaController
+  it_should_behave_like "EveryProjectAreaController"
 
   before do      
     Status.stub!(:default).and_return(stub_model(Status))
