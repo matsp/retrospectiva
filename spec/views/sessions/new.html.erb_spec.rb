@@ -8,11 +8,11 @@ describe "/sessions/new.html.erb" do
 
   it 'should show the login form' do
     render '/sessions/new'
-    template.should have_form_posting_to(session_path) do
-      with_label_for 'user_username'
-      with_text_field_for 'user_username'
-      with_label_for 'user_password'
-      with_text_field_for 'user_password'
+    template.should have_tag('form[action=?]', session_path) do
+      with_tag 'label', :name => 'user_username'
+      with_tag 'input', :type => :text, :name => 'user_username'
+      with_tag 'label', :name => 'user_password'
+      with_tag 'input', :type => :text, :name => 'user_password'
     end
   end
 

@@ -13,10 +13,10 @@ describe "/milestones/edit.html.erb" do
   end
 
   it "should render edit form" do
-    response.should have_form_puting_to(project_milestone_path(@project, @milestone)) do
-      with_text_field_for :name
-      with_text_field_for :info
-      with_submit_button
+    response.should have_tag('form[action=?]', project_milestone_path(@project, @milestone)) do
+      with_tag 'input', :type => :text, :name => :name
+      with_tag 'input', :type => :text, :name => :info
+      with_tag 'input', :type => :submit
     end
   end
 

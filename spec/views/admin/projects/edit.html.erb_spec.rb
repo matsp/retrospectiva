@@ -14,9 +14,9 @@ describe "/admin/projects/edit.html.erb" do
     
   it "should render the form" do
     do_render
-    response.should have_form_puting_to(admin_project_path(@project)) do
-      with_submit_button
-      with_link_to(admin_projects_path)
+    response.should have_tag('form[action=?]', admin_project_path(@project)) do
+      with_tag 'input', :type => :submit
+      with_tag 'a', :href => admin_projects_path
     end
   end
   

@@ -12,8 +12,8 @@ describe "/accounts/new.html.erb" do
     
   it "should render the form" do
     do_render
-    response.should have_form_posting_to(account_path) do
-      with_submit_button
+    response.should have_tag('form[action=?]', account_path) do
+      with_tag 'input', :type => :submit
     end
   end
   

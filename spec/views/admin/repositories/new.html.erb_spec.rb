@@ -14,9 +14,9 @@ describe "/admin/repositories/new.html.erb" do
     
   it "should render the form" do
     do_render
-    response.should have_form_posting_to(admin_repositories_path) do
-      with_submit_button
-      with_link_to(admin_repositories_path)
+    response.should have_tag('form[action=?]', admin_repositories_path) do
+      with_tag 'input', :type => :submit
+      with_tag 'a', :href => admin_repositories_path
     end
   end
 

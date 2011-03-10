@@ -24,7 +24,7 @@ describe "/tickets/new.html.erb" do
 
   it "should render a from" do
     do_render
-    response.should have_form_posting_to(project_tickets_path(@project))
+    response.should have_tag('form[action=?]', project_tickets_path(@project))
   end
 
 end

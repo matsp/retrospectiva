@@ -17,19 +17,20 @@ describe "/admin/users/_form.html.erb" do
     RetroCM[:general][:user_management].should_receive(:[]).twice.with(:activation).and_return('auto')
     do_render
     response.should have_tag('form') do
-      with_text_field_for(:username)
-      with_text_field_for(:email)
-      with_text_field_for(:plain_password)
-      with_text_field_for(:plain_password_confirmation)
-      with_checkbox_for(:admin)
-      with_checkbox_for(:active)
+      with_tag 'input', :type => 'text', :name => :username
+      with_tag 'input', :type => 'text', :name => :email
+      with_tag 'input', :type => 'text', :name => :plain_password
+      with_tag 'input', :type => 'text', :name => :plain_password_confirmation
+
+      with_tag 'input', :name => :admin
+      with_tag 'input', :name => :active
     end
   end
 
   it "should render the group selection" do
     do_render
     response.should have_tag('form fieldset') do
-      with_checkbox_for("group_ids_#{@group.id}")
+      with_tag 'input', :value => "group_ids_#{@group.id}"
     end
   end
 

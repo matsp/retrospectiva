@@ -8,15 +8,11 @@ describe "/search/index.html.erb" do
     template.stub!(:channel_checkboxes).and_return('[CHECKBOXES]')
     assigns[:results] = []
   end
-  
-  def do_render
-    render '/search/index'
-  end
-  
+
   it 'should render the form' do
-    do_render
+    render
     response.should have_tag('form') do
-      with_submit_button
+      with_tag 'input', :type => :submit
       with_tag 'fieldset', '[CHECKBOXES]'
     end
   end
@@ -34,7 +30,7 @@ describe "/search/index.html.erb" do
     it 'should render results' do
       template.should_receive(:highlight_matches).with('A Ticket', nil).and_return('[TITLE EXCERPT]')
       template.should_receive(:highlight_matches).with('Ticket Summary', nil).and_return('[CONTENT EXCERPT]')
-      do_render
+      render
       response.should have_tag('h3', '[TITLE EXCERPT]')
       response.should have_tag('p', '[CONTENT EXCERPT]')
     end

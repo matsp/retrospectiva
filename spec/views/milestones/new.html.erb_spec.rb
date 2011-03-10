@@ -11,10 +11,10 @@ describe "/milestones/new.html.erb" do
   end
 
   it "should render new form" do    
-    response.should have_form_posting_to(project_milestones_path(@project)) do
-      with_text_field_for :name
-      with_text_field_for :info
-      with_submit_button
+    response.should have_tag('form[action=?]', project_milestones_path(@project)) do
+      with_tag 'input', :type => :text, :name => :name
+      with_tag 'input', :type => :text, :name => :info
+      with_tag 'input', :type => :submit
     end
   end
 
