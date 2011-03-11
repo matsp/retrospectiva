@@ -6,7 +6,7 @@ describe TicketReport do
   it "should belong to a project" do
     ticket_report.should belong_to(:project)
   end
-  
+
   it "should validate presence of name" do
     ticket_report.should validate_presence_of(:name)
   end
@@ -24,14 +24,13 @@ describe TicketReport do
   end
 
   it "should validate numeric time intervals" do
-    pending "implementation wrong: doesn’t raise error if not a number, but assigns nil"
     ticket_report = TicketReport.find(1)
     ticket_report.should validate_numericality_of(:time_interval)
     #, :min => 1.day, :nil => true)
-  end  
-  
+  end
+
   describe 'time interval assignement' do
-    
+
     it 'should accept seconds' do
       ticket_report.time_interval = 3600
       ticket_report.time_interval.should == 3600
@@ -39,12 +38,12 @@ describe TicketReport do
 
     it 'should not accept interval options with minutes' do
       ticket_report.time_interval = {:count => '10', :units => 'minutes'}
-      ticket_report.time_interval.should be_nil
+      ticket_report.should have(1).errors_on(:time_interval)
     end
 
     it 'should not accept interval options with hours' do
       ticket_report.time_interval = {:count => '1', :units => 'hours'}
-      ticket_report.time_interval.should be_nil
+      ticket_report.should have(1).errors_on(:time_interval)
     end
 
     it 'should accept interval options with days' do
@@ -56,7 +55,7 @@ describe TicketReport do
       ticket_report.time_interval = {:count => '2', :units => 'weeks'}
       ticket_report.time_interval.should == 2.weeks
     end
-    
+
     it 'should accept interval options with months' do
       ticket_report.time_interval = {:count => '6', :units => 'months'}
       ticket_report.time_interval.should == 6.months
@@ -64,11 +63,11 @@ describe TicketReport do
 
     it 'should accept invalid interval options' do
       ticket_report.time_interval = {:units => 'months'}
-      ticket_report.time_interval.should be_nil
+      ticket_report.should have(1).errors_on(:time_interval)
       ticket_report.time_interval = 'ABC'
-      ticket_report.time_interval.should be_nil
+      ticket_report.should have(1).errors_on(:time_interval)
     end
 
   end
-  
+
 end

@@ -15,12 +15,10 @@ class TicketReport < ActiveRecord::Base
   VALID_UNITS = ['days', 'weeks', 'months']
     
   def time_interval=(value = nil)    
-    seconds = if value.is_a?(Integer)
-      value
-    elsif value.is_a?(Hash) && value[:count].to_i > 0 && VALID_UNITS.include?(value[:units])
+    seconds = if value.is_a?(Hash) && value[:count].to_i > 0 && VALID_UNITS.include?(value[:units])
       value[:count].to_i.send(value[:units])
     else
-      nil
+      value
     end
     write_attribute(:time_interval, seconds)    
   end
