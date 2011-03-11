@@ -16,7 +16,7 @@ case database
 when /postgres/, /pg/
   gem 'pg', :require => false
 when /sqlite/
-  gem 'sqlite3-ruby', :require => false
+  gem 'sqlite3', :require => false
 else
   gem 'mysql', :require => false
 end
