@@ -4,8 +4,10 @@ class AddTimestampsToProjectsAndUsers < ActiveRecord::Migration
     add_column :projects, :updated_at, :timestamp
     add_column :users, :updated_at, :timestamp
     
+    params = "tickets.created_at, milestones.created_at"
+    params = "LEAST(#{params})" unless connection.adapter_name =~ /^SQLite/
     rows = select_all %(
-      SELECT projects.id, MIN(tickets.created_at, milestones.created_at) AS created_at
+      SELECT projects.id, MIN(#{params}) AS created_at
       FROM projects 
       INNER JOIN tickets ON tickets.project_id = projects.id    
       INNER JOIN milestones ON milestones.project_id = projects.id
