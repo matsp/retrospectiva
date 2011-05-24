@@ -36,7 +36,7 @@ describe WikiPage do
     end
 
     it 'should validate uniqueness of title per project' do
-      @page.should validate_uniqueness_of(:title)
+      @page.should validate_uniqueness_of(:title).scoped_to(:author, :content, :project)
     end
   
     it 'should validate correct format of title' do
