@@ -30,7 +30,9 @@ describe WikiPage do
     end
   
     it 'should validate langth of title within 2 and 80 characters' do
-      @page.should validate_length_of(:title, :within => (2..80))
+      @page.should ensure_length_of(:title).
+        is_at_least(2).
+        is_at_most(80)
     end
 
     it 'should validate uniqueness of title per project' do
