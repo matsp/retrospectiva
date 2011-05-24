@@ -17,8 +17,8 @@ describe WikiPage do
       @page.should belong_to(:user)
     end
   
-    it 'should validate association of project' do
-      @page.should validate_association_of(:project)
+    it 'should validate presence of project' do
+      @page.should validate_presence_of(:project)
     end
     
     it 'should validate presence of author' do
