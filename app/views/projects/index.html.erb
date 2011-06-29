@@ -2,41 +2,31 @@
 <% slim_page -%>
 <% auto_discover_feed -%>
 <%= page_title %>
-
+<table>
+ 
 <% if @projects.blank? -%>
   <h2><%=_ 'No projects available' -%></h2>
 <% else -%>
-	<table>
-  <% @projects.each do |project| %>
-	<tr>
-	<td>
-      <span style="font-weight:bold; font-size:1.6em;"><%= link_to h(project.name), project_path(project) -%></span>
+<tr>
+<td>
+  <h2><%=_ 'My Projects' -%></h2>
 
-	<% unless project.info.blank? -%>
-      <%= link_to_function _('Click for info'),
-          visual_effect(:toggle_appear, "project_info_#{project.id}", :duration => 0.5) %>
+  <table>
+    <% pro = relevant_projects(User.current) -%>
+    <% pro.each do |project| -%>
+	<%= render :partial=>"project", :locals=>{:project=> project} -%>          
     <% end -%>
-	<% unless project.info.blank? -%>
-        <div style="display: none;" class="markup box" id="project_info_<%=h project.id %>">
-          <%= markup(project.info) %>
-        </div>
-      <% end -%>
-	</td>
-	</tr>
-	
-	<tr>
-	<td>
-		<b>Latest ticket: </b>
-		<% if project.tickets.blank? -%>
-			<em>none</em>
-		<% else -%>
-			<b><%= link_to h(project.tickets.last.summary), project_ticket_path(project, project.tickets.last) -%></b>
-			updated <%= time_interval_in_words(project.tickets.last.updated_at) -%>
-			by <%= project.tickets.last.author -%>
-		<% end -%>
-	</td>
-	</tr>
-	<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-  <% end -%>
-	</table>
+  </table>
+</td>
+<td>
+  <h2><%=_ 'Other Projects' -%></h2>
+  <table>
+    <% pro = irrelevant_projects(User.current) -%>
+    <% pro.each do |project| -%>
+	<%= render :partial=>"project", :locals=>{:project=> project} -%>          
+    <% end -%>
+  </table>
+</td>
+</tr>
 <% end -%>
+</table>
