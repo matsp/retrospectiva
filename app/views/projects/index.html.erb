@@ -2,31 +2,53 @@
 <% slim_page -%>
 <% auto_discover_feed -%>
 <%= page_title %>
-<table>
  
 <% if @projects.blank? -%>
   <h2><%=_ 'No projects available' -%></h2>
 <% else -%>
-<tr>
-<td>
-  <h2><%=_ 'My Projects' -%></h2>
 
+  <h2><%=_ 'My Projects' -%></h2>
   <table>
-    <% pro = relevant_projects(User.current) -%>
-    <% pro.each do |project| -%>
-	<%= render :partial=>"project", :locals=>{:project=> project} -%>          
-    <% end -%>
+    <tr>
+      <td>
+	<table>
+	  <% pro = relevant_projects(User.current) -%>
+	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
+	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
+	  <% end -%>
+	</table>
+      </td>
+      <td>
+	<table>
+	   <% pro = relevant_projects(User.current) -%>
+	   <% pro.last(pro.length/2).each do |project| -%>
+	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
+	   <% end -%>
+	</table>
+      </td>
+      </tr>
   </table>
-</td>
-<td>
+
   <h2><%=_ 'Other Projects' -%></h2>
   <table>
-    <% pro = irrelevant_projects(User.current) -%>
-    <% pro.each do |project| -%>
-	<%= render :partial=>"project", :locals=>{:project=> project} -%>          
-    <% end -%>
+    <tr>
+      <td>
+	<table>
+	  <% pro = irrelevant_projects(User.current) -%>
+	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
+	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
+	  <% end -%>
+	</table>
+      </td>
+      <td>
+	<table>
+	   <% pro = irrelevant_projects(User.current) -%>
+	   <% pro.last(pro.length/2).each do |project| -%>
+	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
+	   <% end -%>
+	</table>
+      </td>
+      </tr>
   </table>
-</td>
-</tr>
+
 <% end -%>
-</table>

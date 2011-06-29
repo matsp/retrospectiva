@@ -14,13 +14,16 @@
                 <% end -%>
               </td>
             </tr>
-
+	    
             <tr>
               <td>
-                <b>Latest ticket: </b>
-                <% if project.tickets.blank? -%>
-                    <em>none</em>
-                <% else -%>
+		<% if permitted?(:tickets, :view) -%>
+
+                <% elsif project.tickets.blank? -%>
+		    <b>Latest ticket: </b>
+		    <em>none</em>
+		<% else -%>
+		    <b>Latest ticket: </b>
                     <b><%= link_to h(project.tickets.last.summary), project_ticket_path(project, project.tickets.last) -%></b>
                     updated <%= time_interval_in_words(project.tickets.last.updated_at) -%>
                     by <%= project.tickets.last.author -%>
