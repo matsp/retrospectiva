@@ -10,16 +10,16 @@
   <h2><%=_ 'My Projects' -%></h2>
   <table width="100%">
     <tr>
-      <td width="75%">
+      <td width="50%">
 	<table>
 	  <% pro = relevant_projects(User.current) -%>
 	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
-	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
+	     <%= render :partial=>"project", :locals=>{:project=> project} -%>          
 	  <% end -%>
 	</table>
       </td>
       <td></td>
-      <td width="75%">
+      <td width="50%">
 	<table>
 	   <% pro = relevant_projects(User.current) -%>
 	   <% pro.last(pro.length/2).each do |project| -%>
@@ -33,7 +33,7 @@
   <h2><%=_ 'Other Projects' -%></h2>
   <table width="100%">
     <tr>
-      <td width="75%">
+      <td width="50%">
 	<table>
 	  <% pro = irrelevant_projects(User.current) -%>
 	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
@@ -42,7 +42,7 @@
 	</table>
       </td>
       <td></td>
-      <td width="75%">
+      <td width="50%">
 	<table>
 	   <% pro = irrelevant_projects(User.current) -%>
 	   <% pro.last(pro.length/2).each do |project| -%>
