@@ -2,55 +2,51 @@
 <% slim_page -%>
 <% auto_discover_feed -%>
 <%= page_title %>
- 
+
 <% if @projects.blank? -%>
   <h2><%=_ 'No projects available' -%></h2>
 <% else -%>
 
-  <h2><%=_ 'My Projects' -%></h2>
-  <table width="100%">
-    <tr>
-      <td width="50%">
-	<table>
-	  <% pro = relevant_projects(User.current) -%>
-	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
-	     <%= render :partial=>"project", :locals=>{:project=> project} -%>          
-	  <% end -%>
-	</table>
-      </td>
-      <td></td>
-      <td width="50%">
-	<table>
-	   <% pro = relevant_projects(User.current) -%>
-	   <% pro.last(pro.length/2).each do |project| -%>
-	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
-	   <% end -%>
-	</table>
-      </td>
-      </tr>
-  </table>
+<h2><%=_ 'My Projects' -%></h2>
+ 	 
+	<div id = "project_table">
+		<div id = "project_col">
+			<div id = "project_col">  
+				<% pro = relevant_projects(User.current) -%>
+				<% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
+				<%= render :partial=>"project", :locals=>{:project=> project} -%>          
+				<% end -%>
+			</div>
+		<div id = "project_col_middle">
+			&nbsp;
+		</div>	  	
+        <div id = "project_col"> 
+			<% pro = relevant_projects(User.current) -%>
+			<% pro.last(pro.length/2).each do |project| -%>
+			<%= render :partial=>"project", :locals=>{:project=> project} -%>          
+			<% end -%>
+		</div>
+		</div>
+	</div>
 
-  <h2><%=_ 'Other Projects' -%></h2>
-  <table width="100%">
-    <tr>
-      <td width="50%">
-	<table>
-	  <% pro = irrelevant_projects(User.current) -%>
-	  <% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
-	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
-	  <% end -%>
-	</table>
-      </td>
-      <td></td>
-      <td width="50%">
-	<table>
-	   <% pro = irrelevant_projects(User.current) -%>
-	   <% pro.last(pro.length/2).each do |project| -%>
-	      <%= render :partial=>"project", :locals=>{:project=> project} -%>          
-	   <% end -%>
-	</table>
-      </td>
-      </tr>
-  </table>
-
+<h2><%=_ 'Other Projects' -%></h2>
+	<div id = "project_table">
+		<div id = "project_col">
+			<div id = "project_col"> 
+				<% pro = irrelevant_projects(User.current) -%>
+				<% pro.first((pro.length.to_f)/2 + 0.5).each do |project| -%>
+				<%= render :partial=>"project", :locals=>{:project=> project} -%>          
+				<% end -%>
+			</div>
+     	<div id = "project_col_middle">
+			&nbsp;
+		</div>
+		<div id = "project_col"> 
+			<% pro = irrelevant_projects(User.current) -%>
+			<% pro.last(pro.length/2).each do |project| -%>
+			<%= render :partial=>"project", :locals=>{:project=> project} -%>          
+			<% end -%>
+		</div>   	
+       </div>
+	</div>
 <% end -%>

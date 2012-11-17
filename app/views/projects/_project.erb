@@ -1,6 +1,5 @@
-<tr>
-              <td>
-                <span style="font-weight:bold; font-size:1.6em;"><%= link_to h(project.name), project_path(project) -%></span>
+<div id = "project_row">
+                <span style="font-weight:bold; font-size:1.6em;"><%= link_to h(truncate(project.name, :length => 50)), project_path(project) -%></span>
 
                 <% unless project.info.blank? -%>
                   <%= link_to_function _('Click for info'),
@@ -11,28 +10,25 @@
                   <%= markup(project.info) %>
                   </div>
                 <% end -%>
-              </td>
-</tr>
+</div>
 	    
-            <tr>
-              <td>
+<div id = "project_row">
 		<% if permitted?(:tickets, :view) -%>
 
                 <% elsif project.tickets.blank? -%>
 		    <b>Latest ticket: </b>
 		    <em>none</em>
+		    <p>&nbsp;</p>
 		<% else -%>
 		    <b>Latest ticket: </b>
-                    <b><%= link_to h(project.tickets.last.summary), project_ticket_path(project, project.tickets.last) -%></b>
+                    <b><%= link_to h(truncate(project.tickets.last.summary, :length => 50)), project_ticket_path(project, project.tickets.last) -%></b>
+                    <p>
                     updated <%= time_interval_in_words(project.tickets.last.updated_at) -%>
                     by <%= project.tickets.last.author -%>
+                    </p>
                 <% end -%>
-              </td>
-            </tr>
+</div>
 
-
-
-<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-
-
+<div id = "project_row">
+&nbsp;
+</div>
