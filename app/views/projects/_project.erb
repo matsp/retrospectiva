@@ -1,0 +1,34 @@
+<div id = "project_row">
+                <span style="font-weight:bold; font-size:1.6em;"><%= link_to h(truncate(project.name, :length => 50)), project_path(project) -%></span>
+
+                <% unless project.info.blank? -%>
+                  <%= link_to_function _('Click for info'),
+                      visual_effect(:toggle_appear, "project_info_#{project.id}", :duration => 0.5) %>
+                <% end -%>
+                <% unless project.info.blank? -%>
+                  <div style="display: none;" class="markup box" id="project_info_<%=h project.id %>">
+                  <%= markup(project.info) %>
+                  </div>
+                <% end -%>
+</div>
+	    
+<div id = "project_row">
+		<% if permitted?(:tickets, :view) -%>
+
+                <% elsif project.tickets.blank? -%>
+		    <b>Latest ticket: </b>
+		    <em>none</em>
+		    <p>&nbsp;</p>
+		<% else -%>
+		    <b>Latest ticket: </b>
+                    <b><%= link_to h(truncate(project.tickets.last.summary, :length => 50)), project_ticket_path(project, project.tickets.last) -%></b>
+                    <p>
+                    updated <%= time_interval_in_words(project.tickets.last.updated_at) -%>
+                    by <%= project.tickets.last.author -%>
+                    </p>
+                <% end -%>
+</div>
+
+<div id = "project_row">
+&nbsp;
+</div>

@@ -68,7 +68,7 @@
 
 #content {
   padding: 20px 30px 60px 30px;
-  max-width: 1160px;
+  max-width: 95%;
 }
 
 ul#breadcrumbs {
@@ -82,8 +82,8 @@ ul#breadcrumbs {
   }
   ul#breadcrumbs li.first { padding: 0; background-image: none; }
 
-
-.slim { width: 950px; }
+.slim_original { width: 950px; }
+.slim { width: 100%; }
 .super-slim { width: 640px; }
 
 
