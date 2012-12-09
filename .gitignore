@@ -6,3 +6,6 @@ Capfile
 *.*~
 vendor/gems
 vendor/rails
+tmp/
+log/
+public/submin
