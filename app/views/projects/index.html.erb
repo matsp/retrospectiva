@@ -21,7 +21,7 @@
     		    <div id = "project_col"> 
 				<% pro = relevant_projects(User.current) -%>
 				<% pro.last(pro.length/2).each do |project| -%>
-			<	%= render :partial=>"project", :locals=>{:project=> project} -%>          
+			<%= render :partial=>"project", :locals=>{:project=> project} -%>          
 				<% end -%>
 		    </div>
 	</div>
