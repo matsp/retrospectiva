@@ -271,4 +271,23 @@ text-align: left;
 vertical-align: top;
 min-width: 10%;
 }
+#ticket_options_table {
+display: table;
+width: 70%;
+float: none;
+}
+#ticket_options_table_row {
+display: table-row;
+float: left;
+}
+#ticket_options_table_col {
+display: table-cell;
+min-width: 15%;
+margin-top: 6px;
+}
+#ticket_options_table_col_2 {
+display: table-cell;
+min-width: 15%;
+margin-right: 5px;
+}
 
