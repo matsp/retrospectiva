@@ -10,6 +10,8 @@ module ProjectsHelper
     end
     pro.flatten!
     pro.uniq
+    pro.sort {|x,y| x.to_s <=> y.to_s}
+    pro.uniq
   end
   
   def irrelevant_projects(user)

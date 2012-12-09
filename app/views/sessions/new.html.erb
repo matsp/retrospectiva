@@ -13,6 +13,10 @@
     <%= f.text_field :username -%>
   <% end -%>
 
+  <script type="text/javascript">
+      document.getElementById('user_username').focus();
+  </script>
+
   <% f.fieldset do -%>
     <%= f.label :password, _('Password') + ':' -%>
     <%= f.password_field :password -%>
