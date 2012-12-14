@@ -282,12 +282,12 @@ float: left;
 }
 #ticket_options_table_col {
 display: table-cell;
-min-width: 15%;
+min-width: 5%;
 margin-top: 6px;
 }
 #ticket_options_table_col_2 {
 display: table-cell;
-min-width: 15%;
+min-width: 5%;
 margin-right: 5px;
 }
 

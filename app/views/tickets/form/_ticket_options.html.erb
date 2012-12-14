@@ -8,22 +8,14 @@
         <div id="ticket_options_table_row"><%= f.label :status_id, _('Status') + ':' %></div>
         <br></br>
         <div id="ticket_options_table_row"><%= f.label :priority_id, _('Priority') + ':' %></div>
-        <br></br>
-        <%= view_extensions :ticket, :options, :middle, :locals => { :f => f } %>
-        <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1, type2)| -%>
-        <div id="ticket_options_table_row"><%= f.label "ticket_property_#{type1.id}_ids", h(type1.name) + ':' if type1 %>&nbsp;</div>
-        <div id="ticket_options_table_row"><%= f.label "ticket_property_#{type2.id}_ids", h(type2.name) + ':' if type2 %>&nbsp;</div>
     </div>
+    <%= view_extensions :ticket, :options, :middle, :locals => { :f => f } %>
     <div id="ticket_options_table_col_2">
         <div id="ticket_options_table_row"><%= f.collection_select :status_id, Status.all(:order => 'rank'), 'id', 'name' %></div>
         <br></br>  
         <div id="ticket_options_table_row"><%= f.collection_select :priority_id, Priority.all(:order => 'rank'), 'id', 'name' -%></div>
-        <br></br>
-        <div id="ticket_options_table_row"><%= property_select(f, @ticket, type1) if type1 %>&nbsp;</div>
-        <div id="ticket_options_table_row"><%= property_select(f, @ticket, type2) if type2 %>&nbsp;</div>
-        <% end if Project.current.ticket_property_types.any? -%>
-        <%= view_extensions :ticket, :options, :bottom, :locals => { f => :f } %>  
     </div>
+    <%= view_extensions :ticket, :options, :bottom, :locals => { f => :f } %>  
     <div id="ticket_options_table_col">
         <div id="ticket_options_table_row"><%= f.label :assigned_user, _('Assigned To') + ':' %></div>
         <br></br>
@@ -34,7 +26,28 @@
         <br></br> 
         <div id="ticket_options_table_row"><%= f.collection_select :milestone_id, Project.current.milestones.in_default_order.active_on(@ticket.created_at), 'id', 'name', { :include_blank => true } -%></div>
     </div>
- 
-  </div>
+    <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1,type2)| -%>
+    <div id="ticket_options_table_col">
+        <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1,type2)| -%>
+        <%= f.label "ticket_property_#{type1.id}_ids", h(type1.name) + ':' if type1 %>&nbsp;
+        <% end if Project.current.ticket_property_types.any? -%>
+    </div>
+    <div id="ticket_options_table_col_2">
+        <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1,type2)| -%>
+        <%= property_select(f, @ticket, type1) if type1 %>&nbsp;
+        <% end if Project.current.ticket_property_types.any? -%>
+    </div>
+    <div id="ticket_options_table_col">
+        <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1,type2)| -%>
+        <%= f.label "ticket_property_#{type2.id}_ids", h(type2.name) + ':' if type2 %>&nbsp;        
+        <% end if Project.current.ticket_property_types.any? -%>
+    </div>
+    <div id="ticket_options_table_col_2">
+        <% Project.current.ticket_property_types.in_groups_of(2).each do |(type1,type2)| -%>
+        <%= property_select(f, @ticket, type2) if type2 %>&nbsp;
+        <% end if Project.current.ticket_property_types.any? -%>
+    </div>
+    <% end if Project.current.ticket_property_types.any? -%>
+ </div>
 
 <% end -%>
